@@ -58,20 +58,22 @@
           <div class="modal-body">
             <form
               name="reserve"
+              id="reserve"
               action="index.html"
               method="get"
               onsubmit="return validate();"
             >
               <div
                 class="formData">
-                <label>Prénom</label><br>
+                <label>Prénom</label>
                 <input
                   class="text-control"
                   type="text"
                   id="first"
                   name="first"
                   minlength="2"
-                /><br>
+                />
+                <div class="error"></div>
               </div>
               <div
                 class="formData">
@@ -200,8 +202,8 @@
               </div>
               <input
                 class="btn-submit"
-                type="submit"
                 class="button"
+                type="submit"
                 value="C'est parti"
               />
             </form>
@@ -215,5 +217,6 @@
       </p>
     </footer>
     <script src="modal.js"></script>
+    <script src="form.js"></script>
   </body>
 </html>
