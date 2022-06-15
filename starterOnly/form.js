@@ -15,6 +15,17 @@ const locPortland = document.getElementById("location6");
 const termsOfUse = document.getElementById("checkbox1");
 const inform = document.getElementById("checkbox2");
 
+// Error messages
+const firstNameMsg =
+  "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+const lastNameMsg =
+  "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+const emailMsg = "Veuillez entrer une adresse email valide.";
+const birthdateMsg = "Vous devez entrer votre date de naissance.";
+const quantityMsg = "Veuillez entrer une valeur numérique";
+const locationMsg = "Vous devez choisir une option.";
+const termsOfUseMsg = "Vous devez accepter les termes et conditions.";
+
 // Submit Form
 reserveForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -34,7 +45,13 @@ const setError = (element, message) => {
 
 // Set to Success
 const setSuccess = (element) => {
-  return;
+  const formData = element.parentElement;
+
+  formData.classList.remove("data-error");
+  formData.removeAttribute("data-error");
+  element.classList.remove("data-error");
+
+  formData.classList.add("success");
 };
 
 // Email Validation
@@ -47,10 +64,29 @@ const isValidEmail = (email) => {
 // Inputs Validation Function
 const validateInputs = () => {
   const firstNameValue = firstName.value.trim();
+  const lastNameValue = lastName.value.trim();
+  const emailValue = email.value.trim();
 
+  // First name validation
   if (firstNameValue === "" || firstNameValue.length < 2) {
-    setError(first, "first name is required");
+    setError(first, firstNameMsg);
   } else {
     setSuccess(first);
+  }
+
+  // Last name validation
+  if (lastNameValue === "" || lastNameValue.length < 2) {
+    setError(last, lastNameMsg);
+  } else {
+    setSuccess(last);
+  }
+
+  // Email validation
+  if (emailValue === "") {
+    setError(email, "Email is required");
+  } else if (!isValidEmail(emailValue)) {
+    setError(email, emailMsg);
+  } else {
+    setSuccess(email);
   }
 };
