@@ -34,13 +34,7 @@ const setError = (element, message) => {
 
 // Set to Success
 const setSuccess = (element) => {
-  const inputControl = element.parentElement;
-  console.log(inputControl);
-  const errorDisplay = inputControl.querySelector(".error");
-
-  errorDisplay.innerText = "";
-  inputControl.classList.add("success");
-  inputControl.classList.remove("error");
+  return;
 };
 
 // Email Validation
