@@ -8,7 +8,7 @@ const lastNameMsg =
 const emailMsg = "Veuillez entrer une adresse email valide.";
 const birthdateMsg = "Vous devez entrer votre date de naissance.";
 const quantityMsg = "Veuillez entrer une valeur numérique";
-const locationMsg = "Vous devez choisir une option.";
+const locationMsg = "Vous devez choisir un tournoi.";
 const termsOfUseMsg = "Vous devez accepter les termes et conditions.";
 
 // Submit Form
@@ -54,14 +54,20 @@ function validateInputs() {
   const emailValue = document.getElementById("email").value.trim();
   const birthdateValue = document.getElementById("birthdate").value.trim();
   const quantityValue = document.getElementById("quantity").value.trim();
-  const locNewYorkValue = document.getElementById("location1").checked;
-  const locSanFranciscoValue = document.getElementById("location2").checked;
-  const locSeattleValue = document.getElementById("location3").checked;
-  const locChicagoValue = document.getElementById("location4").checked;
-  const locBostonValue = document.getElementById("location5").checked;
-  const locPortlandValue = document.getElementById("location6").checked;
   const termsOfUseValue = document.getElementById("checkbox1").checked;
   const informValue = document.getElementById("checkbox2").checked;
+
+  const locationValues = {
+    NewYork: document.getElementById("location1").checked,
+    SanFrancisco: document.getElementById("location2").checked,
+    Seattle: document.getElementById("location3").checked,
+    Chicago: document.getElementById("location4").checked,
+    Boston: document.getElementById("location5").checked,
+    Portland: document.getElementById("location6").checked,
+  };
+  const locationValue = Object.keys(locationValues).find(
+    (key) => locationValues[key] === true
+  );
 
   // Set the validation
   let firstNameValidation = false;
@@ -115,14 +121,7 @@ function validateInputs() {
   }
 
   // Location validation
-  if (
-    locNewYorkValue === false &&
-    locSanFranciscoValue === false &&
-    locSeattleValue === false &&
-    locChicagoValue === false &&
-    locBostonValue === false &&
-    locPortlandValue === false
-  ) {
+  if (!locationValue) {
     setError(location1, locationMsg);
   } else {
     setSuccess(location1);
@@ -151,7 +150,7 @@ function validateInputs() {
       email: emailValue,
       birthdate: birthdateValue,
       quantity: quantityValue,
-      location: "",
+      location: locationValue,
       termsOfUse: termsOfUseValue,
       inform: informValue,
     };
