@@ -66,7 +66,7 @@ function validateInputs() {
   const firstNameValue = firstName.value.trim();
   const lastNameValue = lastName.value.trim();
   const emailValue = email.value.trim();
-  // const birthdateValue = birthdate.value.trim();
+  const birthdateValue = birthdate.value.trim();
   const quantityValue = quantity.value.trim();
   const locNewYorkValue = locNewYork.checked;
   const locSanFranciscoValue = locSanFrancisco.checked;
@@ -133,4 +133,38 @@ function validateInputs() {
   } else {
     setSuccess(checkbox1);
   }
+
+  formData = {
+    first: firstNameValue,
+    last: lastNameValue,
+    email: emailValue,
+    birthdate: birthdateValue,
+    quantity: quantityValue,
+    location: "",
+    termsOfUse: termsOfUse.checked,
+    inform: inform.checked,
+  };
+  console.log(formData);
+
+  reserveForm.reset();
+  thanksModal();
 }
+
+// function thanksModal
+const thanksModal = () => {
+  const modalForm = document.querySelector("#modalForm");
+  const modalBody = document.querySelector(".modal-body");
+  reserve.remove();
+
+  modalBody.innerHTML +=
+    "<div class = 'modal-thanks'> <div class = 'modal-thanks__message'>Merci pour votre inscription<div> <div class = 'modal-thanks__button'> Fermer <div>";
+
+  modalBg.style.display = "block";
+
+  // Close Modal form
+  const thanksBtn = document.querySelector(".modal-thanks__button");
+
+  thanksBtn.addEventListener("click", () => {
+    modalBg.style.display = "none";
+  });
+};
