@@ -1,20 +1,5 @@
 const reserveForm = document.getElementById("reserve");
 
-// Form Input
-const firstName = document.getElementById("first");
-const lastName = document.getElementById("last");
-const email = document.getElementById("email");
-const birthdate = document.getElementById("birthdate");
-const quantity = document.getElementById("quantity");
-const locNewYork = document.getElementById("location1");
-const locSanFrancisco = document.getElementById("location2");
-const locSeattle = document.getElementById("location3");
-const locChicago = document.getElementById("location4");
-const locBoston = document.getElementById("location5");
-const locPortland = document.getElementById("location6");
-const termsOfUse = document.getElementById("checkbox1");
-const inform = document.getElementById("checkbox2");
-
 // Error messages
 const firstNameMsg =
   "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
@@ -63,24 +48,36 @@ const isValidEmail = (email) => {
 
 // Inputs Validation Function
 function validateInputs() {
-  const firstNameValue = firstName.value.trim();
-  const lastNameValue = lastName.value.trim();
-  const emailValue = email.value.trim();
-  const birthdateValue = birthdate.value.trim();
-  const quantityValue = quantity.value.trim();
-  const locNewYorkValue = locNewYork.checked;
-  const locSanFranciscoValue = locSanFrancisco.checked;
-  const locSeattleValue = locSeattle.checked;
-  const locChicagoValue = locChicago.checked;
-  const locBostonValue = locBoston.checked;
-  const locPortlandValue = locPortland.checked;
-  const termsOfUseValue = termsOfUse.checked;
+  // Get the values
+  const firstNameValue = document.getElementById("first").value.trim();
+  const lastNameValue = document.getElementById("last").value.trim();
+  const emailValue = document.getElementById("email").value.trim();
+  const birthdateValue = document.getElementById("birthdate").value.trim();
+  const quantityValue = document.getElementById("quantity").value.trim();
+  const locNewYorkValue = document.getElementById("location1").checked;
+  const locSanFranciscoValue = document.getElementById("location2").checked;
+  const locSeattleValue = document.getElementById("location3").checked;
+  const locChicagoValue = document.getElementById("location4").checked;
+  const locBostonValue = document.getElementById("location5").checked;
+  const locPortlandValue = document.getElementById("location6").checked;
+  const termsOfUseValue = document.getElementById("checkbox1").checked;
+  const informValue = document.getElementById("checkbox2").checked;
+
+  // Set the validation
+  let firstNameValidation = false;
+  let lastNameValidation = false;
+  let emailValidation = false;
+  let birthdateValidation = false;
+  let quantityValidation = false;
+  let locationValidation = false;
+  let termsOfUseValidation = false;
 
   // First name validation
   if (firstNameValue === "" || firstNameValue.length < 2) {
     setError(first, firstNameMsg);
   } else {
     setSuccess(first);
+    firstNameValidation = true;
   }
 
   // Last name validation
@@ -88,6 +85,7 @@ function validateInputs() {
     setError(last, lastNameMsg);
   } else {
     setSuccess(last);
+    lastNameValidation = true;
   }
 
   // Email validation
@@ -97,6 +95,7 @@ function validateInputs() {
     setError(email, emailMsg);
   } else {
     setSuccess(email);
+    emailValidation = true;
   }
 
   // Birthdate validation
@@ -104,6 +103,7 @@ function validateInputs() {
   //   setError(birthdate, birthdateMsg);
   // } else {
   //   setSuccess(birthdate);
+  //   birthdateValidation = true
   // }
 
   // Quantity validation
@@ -111,6 +111,7 @@ function validateInputs() {
     setError(quantity, quantityMsg);
   } else {
     setSuccess(quantity);
+    quantityValidation = true;
   }
 
   // Location validation
@@ -125,6 +126,7 @@ function validateInputs() {
     setError(location1, locationMsg);
   } else {
     setSuccess(location1);
+    locationValidation = true;
   }
 
   // TermsOfUse validation
@@ -132,22 +134,32 @@ function validateInputs() {
     setError(checkbox1, termsOfUseMsg);
   } else {
     setSuccess(checkbox1);
+    termsOfUseValidation = true;
   }
 
-  formData = {
-    first: firstNameValue,
-    last: lastNameValue,
-    email: emailValue,
-    birthdate: birthdateValue,
-    quantity: quantityValue,
-    location: "",
-    termsOfUse: termsOfUse.checked,
-    inform: inform.checked,
-  };
-  console.log(formData);
+  if (
+    firstNameValidation &&
+    lastNameValidation &&
+    emailValidation &&
+    quantityValidation &&
+    locationValidation &&
+    termsOfUseValidation
+  ) {
+    formData = {
+      first: firstNameValue,
+      last: lastNameValue,
+      email: emailValue,
+      birthdate: birthdateValue,
+      quantity: quantityValue,
+      location: "",
+      termsOfUse: termsOfUseValue,
+      inform: informValue,
+    };
+    console.log(formData);
 
-  reserveForm.reset();
-  thanksModal();
+    reserveForm.reset();
+    thanksModal();
+  }
 }
 
 // function thanksModal
@@ -156,15 +168,23 @@ const thanksModal = () => {
   const modalBody = document.querySelector(".modal-body");
   reserve.remove();
 
-  modalBody.innerHTML +=
-    "<div class = 'modal-thanks'> <div class = 'modal-thanks__message'>Merci pour votre inscription<div> <div class = 'modal-thanks__button'> Fermer <div>";
+  modalBody.innerHTML += `<div class='modal-thanks'>
+      <div class='modal-thanks__message'>Merci pour votre inscription</div>
+      <button class='modal-thanks__button button'>Fermer</button>
+    </div>`;
 
   modalBg.style.display = "block";
 
-  // Close Modal form
+  // Close Modal form and reload
   const thanksBtn = document.querySelector(".modal-thanks__button");
 
   thanksBtn.addEventListener("click", () => {
     modalBg.style.display = "none";
+    location.reload();
+  });
+
+  modalCloseBtn.addEventListener("click", () => {
+    modalBg.style.display = "none";
+    location.reload();
   });
 };
