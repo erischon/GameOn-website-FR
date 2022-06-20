@@ -62,10 +62,19 @@ const isValidEmail = (email) => {
 };
 
 // Inputs Validation Function
-const validateInputs = () => {
+function validateInputs() {
   const firstNameValue = firstName.value.trim();
   const lastNameValue = lastName.value.trim();
   const emailValue = email.value.trim();
+  // const birthdateValue = birthdate.value.trim();
+  const quantityValue = quantity.value.trim();
+  const locNewYorkValue = locNewYork.checked;
+  const locSanFranciscoValue = locSanFrancisco.checked;
+  const locSeattleValue = locSeattle.checked;
+  const locChicagoValue = locChicago.checked;
+  const locBostonValue = locBoston.checked;
+  const locPortlandValue = locPortland.checked;
+  const termsOfUseValue = termsOfUse.checked;
 
   // First name validation
   if (firstNameValue === "" || firstNameValue.length < 2) {
@@ -83,10 +92,45 @@ const validateInputs = () => {
 
   // Email validation
   if (emailValue === "") {
-    setError(email, "Email is required");
+    setError(email, emailMsg);
   } else if (!isValidEmail(emailValue)) {
     setError(email, emailMsg);
   } else {
     setSuccess(email);
   }
-};
+
+  // Birthdate validation
+  // if (birthdateValue === "") {
+  //   setError(birthdate, birthdateMsg);
+  // } else {
+  //   setSuccess(birthdate);
+  // }
+
+  // Quantity validation
+  if (quantityValue === "") {
+    setError(quantity, quantityMsg);
+  } else {
+    setSuccess(quantity);
+  }
+
+  // Location validation
+  if (
+    locNewYorkValue === false &&
+    locSanFranciscoValue === false &&
+    locSeattleValue === false &&
+    locChicagoValue === false &&
+    locBostonValue === false &&
+    locPortlandValue === false
+  ) {
+    setError(location1, locationMsg);
+  } else {
+    setSuccess(location1);
+  }
+
+  // TermsOfUse validation
+  if (termsOfUseValue === false) {
+    setError(checkbox1, termsOfUseMsg);
+  } else {
+    setSuccess(checkbox1);
+  }
+}
