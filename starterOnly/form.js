@@ -6,7 +6,7 @@ const firstNameMsg =
 const lastNameMsg =
   "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
 const emailMsg = "Veuillez entrer une adresse email valide.";
-const birthdateMsg = "Vous devez entrer votre date de naissance.";
+const birthdateMsg = "Veuillez entrer une date de naissance valide.";
 const quantityMsg = "Veuillez entrer une valeur numérique";
 const locationMsg = "Vous devez choisir un tournoi.";
 const termsOfUseMsg = "Vous devez accepter les termes et conditions.";
@@ -44,6 +44,20 @@ const isValidEmail = (email) => {
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
+};
+
+// Birthdate Validation
+const isValidBirthdate = (birthdateValue) => {
+  const birthdate = new Date(birthdateValue);
+  const today = new Date();
+  const ageConstraint = 12;
+  const minimumAge = today.setDate(today.getDate() - ageConstraint * 365);
+
+  if (birthdate >= minimumAge) {
+    return false;
+  }
+
+  return true;
 };
 
 // Inputs Validation Function
@@ -105,12 +119,14 @@ function validateInputs() {
   }
 
   // Birthdate validation
-  // if (birthdateValue === "") {
-  //   setError(birthdate, birthdateMsg);
-  // } else {
-  //   setSuccess(birthdate);
-  //   birthdateValidation = true
-  // }
+  if (birthdateValue === "") {
+    setError(birthdate, birthdateMsg);
+  } else if (!isValidBirthdate(birthdateValue)) {
+    setError(birthdate, birthdateMsg);
+  } else {
+    setSuccess(birthdate);
+    birthdateValidation = true;
+  }
 
   // Quantity validation
   if (quantityValue === "") {
@@ -140,6 +156,7 @@ function validateInputs() {
     firstNameValidation &&
     lastNameValidation &&
     emailValidation &&
+    birthdateValidation &&
     quantityValidation &&
     locationValidation &&
     termsOfUseValidation
