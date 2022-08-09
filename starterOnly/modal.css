@@ -601,16 +601,18 @@ footer {
 
   .hero-section {
     /* display: block; */
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     box-shadow: unset;
+    min-height: 0;
   }
 
   .hero-content {
     /* display: block; */
-    grid-column: span 1;
+    /* grid-column: span 1; */
     background: #fff;
     color: #000;
-    /* padding: 20px; */
+    padding: 0;
     min-width: 0;
     margin: 0;
   }
@@ -621,8 +623,6 @@ footer {
 
   .hero-content::after {
     content: unset;
-    /* display: none; */
-    /* visibility: hidden; */
   }
 
   .hero-content .btn-signup {
@@ -630,13 +630,15 @@ footer {
   }
 
   .hero-headline {
-    font-size: 2.5rem;
+    font-size: 40px;
+    font-weight: 500;
     white-space: normal;
   }
 
   .hero-text {
     width: unset;
-    font-size: 1.2rem;
+    font-size: 13px;
+    margin-top: 1rem;
   }
 
   .hero-img img {
@@ -646,13 +648,16 @@ footer {
 
   .hero-section > .btn-signup {
     display: block;
-    margin: 32px auto 10px;
+    margin: 32px auto;
     padding: 12px 35px;
   }
 
   .copyrights {
-    margin-top: 50px;
+    /* margin-top: 50px; */
     text-align: center;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
   }
 }
 
