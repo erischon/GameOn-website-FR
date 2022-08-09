@@ -561,7 +561,7 @@ footer {
 
 @media screen and (max-width: 800px) {
   body {
-    display: block;
+    display: unset;
   }
 
   .topnav {
@@ -574,46 +574,55 @@ footer {
     align-items: baseline;
   }
 
-  .topnav.responsive a:hover {
+  /* .topnav.responsive a:hover {
     background-color: transparent;
-  }
+  } */
 
-  .topnav.responsive a:hover i.fa.fa-bars {
+  /* .topnav a:hover i.fa.fa-bars {
     color: white;
-  }
+  } */
 
-  .topnav a:hover {
+  /* .topnav a:hover {
     background-color: transparent;
-  }
+  } */
 
-  a.icon {
+  /* a.icon {
     margin: 0;
-  }
+  } */
 
-  i.fa.fa-bars {
+  /* i.fa.fa-bars {
     color: #ff001b;
     margin: 0;
-  }
+  } */
 
   .header-logo img {
     width: 130px;
   }
 
   .hero-section {
-    display: block;
+    /* display: block; */
+    grid-template-columns: 1fr;
     box-shadow: unset;
   }
 
   .hero-content {
-    display: block;
+    /* display: block; */
+    grid-column: span 1;
     background: #fff;
     color: #000;
-    padding: 20px;
+    /* padding: 20px; */
+    min-width: 0;
     margin: 0;
+  }
+
+  .hero-img {
+    grid-column: span 1;
   }
 
   .hero-content::after {
     content: unset;
+    /* display: none; */
+    /* visibility: hidden; */
   }
 
   .hero-content .btn-signup {
@@ -626,7 +635,7 @@ footer {
   }
 
   .hero-text {
-    /* width: unset; */
+    width: unset;
     font-size: 1.2rem;
   }
 
