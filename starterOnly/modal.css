@@ -33,6 +33,8 @@ img {
 }
 
 .topnav {
+  display: flex;
+  justify-content: space-between;
   overflow: hidden;
   margin: 3.5%;
 }
@@ -73,7 +75,7 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .topnav a {
     display: none;
   }
@@ -84,7 +86,7 @@ img {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .topnav.responsive {
     position: relative;
   }
